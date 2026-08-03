@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REFLECTION | Consulting Packaging & Design</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #060000;
+            --text-color: #ffffff;
+            --accent-color: #d30000;
+            --font-ar: 'Cairo', sans-serif;
+            --font-en: 'Montserrat', sans-serif;
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-en);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Interactive & Faster Animated Gradient Background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle 800px at var(--mouse-x) var(--mouse-y), rgba(211, 0, 0, 0.25) 0%, #060000 60%);
+            z-index: -1;
+            animation: pulseFast 3s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes pulseFast {
+            0% { transform: scale(1); opacity: 0.9; }
+            100% { transform: scale(1.05); opacity: 1; }
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.9s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.2s; }
+        .reveal-delay-2 { transition-delay: 0.4s; }
+        .reveal-delay-3 { transition-delay: 0.6s; }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(6, 0, 0, 0.9);
+            backdrop-filter: blur(15px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+
+        .logo img {
+            height: 35px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-switch button {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--text-color);
+            padding: 4px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .lang-switch button:hover, .lang-switch button.active {
+            border-color: var(--accent-color);
+            background: var(--accent-color);
+            color: #fff;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 40px;
+        }
+
+        .hero-logos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .main-logo-animated {
+            width: 110px;
+            height: 220px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(211,0,0,0.3));
+        }
+
+        .text-logo-png {
+            height: 55px;
+            object-fit: contain;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #ccc;
+            max-width: 800px;
+            line-height: 1.4;
+        }
+
+        /* Section Global */
+        section {
+            padding: 100px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.3rem;
+            font-weight: 900;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* About & Services Text */
+        .text-content {
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #bbb;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 35px 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(211,0,0,0.3);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card i {
+            font-size: 2.8rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* --- Professional Slider Styles --- */
+        .portfolio-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: #111;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 2;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(6,0,0,0.9), transparent);
+            padding: 30px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .slide-caption h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .slide-counter {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            background: rgba(0,0,0,0.6);
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(211,0,0,0.3);
+        }
+
+        /* Slide 7 Special Styling */
+        .slide-pdf-card {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #120202 0%, #200505 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .slide-pdf-card i {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-15px);}
+            60% {transform: translateY(-7px);}
+        }
+
+        .slide-pdf-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .slide-pdf-card p {
+            color: #aaa;
+            margin-bottom: 25px;
+            max-width: 500px;
+        }
+
+        .pdf-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(211,0,0,0.4);
+        }
+
+        .pdf-action-btn:hover {
+            transform: scale(1.05);
+            background: #ff1a1a;
+            box-shadow: 0 8px 25px rgba(211,0,0,0.6);
+        }
+
+        /* Slider Controls */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(6, 0, 0, 0.6);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .slider-btn:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .slider-prev { left: 20px; }
+        .slider-next { right: 20px; }
+
+        /* Slider Dots */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .dot.active, .dot:hover {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* PDF Portfolio Direct Box */
+        .pdf-portfolio-box {
+            margin-top: 40px;
+            background: linear-gradient(145deg, rgba(20, 5, 5, 0.9) 0%, rgba(10, 2, 2, 0.95) 100%);
+            border: 1px solid rgba(211, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transition: all 0.4s;
+        }
+
+        .pdf-portfolio-box:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 45px rgba(211, 0, 0, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .pdf-box-info {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .pdf-box-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(211, 0, 0, 0.15);
+            border: 1px solid rgba(211, 0, 0, 0.4);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .pdf-box-text h3 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .pdf-box-text p {
+            color: #aaa;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Contact & Footer Section */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            align-items: stretch;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info, .ceo-info {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 45px 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ceo-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-top: 4px solid var(--accent-color);
+            background: linear-gradient(145deg, rgba(20,20,20,0.8) 0%, rgba(6,0,0,0.9) 100%);
+        }
+
+        .ceo-info h3 {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .ceo-info h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .ceo-info p {
+            color: #888;
+            font-size: 1.05rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+
+        .contact-item i {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(211,0,0,0.1);
+            border-radius: 50%;
+            margin-inline-end: 18px;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover i {
+            background: var(--accent-color);
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .contact-item a, .contact-item span {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            direction: ltr;
+            unicode-bidi: embed;
+            line-height: 1.5;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 35px;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .social-icons a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-icons a:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(211, 0, 0, 0.4);
+        }
+
+        /* Responsive Design for Mobile & Tablet */
+        @media (max-width: 900px) {
+            nav {
+                padding: 15px 20px;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(6, 0, 0, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 25px;
+                gap: 20px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                transform: translateY(-150%);
+                opacity: 0;
+                transition: all 0.4s ease-in-out;
+                pointer-events: none;
+            }
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .pdf-portfolio-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .pdf-box-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            section {
+                padding: 70px 20px;
+            }
+            .hero h1 {
+                font-size: 1.4rem;
+                letter-spacing: 2px;
+            }
+            .section-title {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gradient-bg" id="interactive-bg"></div>
+
+    <nav>
+        <div class="logo">
+            <img src="logo_text.png" alt="Reflection Logo">
+        </div>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#home" class="lang-txt" data-en="Home" data-ar="الرئيسية" data-ru="Главная">Home</a></li>
+            <li><a href="#about" class="lang-txt" data-en="About" data-ar="من نحن" data-ru="О нас">About</a></li>
+            <li><a href="#services" class="lang-txt" data-en="Services" data-ar="خدماتنا" data-ru="Услуги">Services</a></li>
+            <li><a href="#portfolio" class="lang-txt" data-en="Portfolio" data-ar="أعمالنا" data-ru="Портфолио">Portfolio</a></li>
+            <li><a href="#contact" class="lang-txt" data-en="Contact" data-ar="اتصل بنا" data-ru="Контакты">Contact</a></li>
+            <li class="lang-switch">
+                <button onclick="setLang('en')" class="active">EN</button>
+                <button onclick="setLang('ar')">AR</button>
+                <button onclick="setLang('ru')">RU</button>
+            </li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero reveal">
+        <div class="hero-logos">
+            <!-- Animated Vertical Logo -->
+            <img src="animated_logo.gif" alt="Reflection Animated Logo" class="main-logo-animated">
+            <!-- Text Logo (PNG) -->
+            <img src="logo_text.png" alt="Reflection Name" class="text-logo-png">
+        </div>
+        <h1 class="lang-txt reveal reveal-delay-1" data-en="Consulting, Packaging & Design" data-ar="للاستشارات، التعبئة والتغليف، والتصميم" data-ru="Консалтинг, Упаковка и Дизайн">Consulting, Packaging & Design</h1>
+    </section>
+
+    <section id="about" class="reveal">
+        <h2 class="section-title lang-txt" data-en="About Us" data-ar="من نحن" data-ru="О нас">About Us</h2>
+        <div class="text-content lang-txt" data-en="We are Reflection, a premium agency dedicated to elevating brands through innovative consulting, structural packaging, and cutting-edge visual design. We transform abstract ideas into tangible, high-end realities that resonate with your target audience and stand the test of time." data-ar="نحن شركة ريفليكشن، وكالة رائدة مكرسة للارتقاء بالعلامات التجارية من خلال الاستشارات المبتكرة، وتصميم العبوات، والتصميم المرئي المتطور. نحن نحول الأفكار المجردة إلى حقائق ملموسة وعالية الجودة تترك أثراً طويل الأمد." data-ru="Мы - Reflection, ведущее агентство, специализирующееся на консалтинге, упаковке и передовом визуальном дизайне. Мы превращаем идеи в визуальные шедевры.">
+            We are Reflection, a premium agency dedicated to elevating brands through innovative consulting, structural packaging, and cutting-edge visual design. We transform abstract ideas into tangible, high-end realities that resonate with your target audience and stand the test of time.
+        </div>
+    </section>
+
+    <section id="services" class="reveal">
+        <h2 class="section-title lang-txt" data-en="Our Services" data-ar="خدماتنا" data-ru="Наши Услуги">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card reveal reveal-delay-1">
+                <i class="fas fa-lightbulb"></i>
+                <h3 class="lang-txt" data-en="Consulting" data-ar="الاستشارات" data-ru="Консалтинг">Consulting</h3>
+                <p class="lang-txt" data-en="Strategic guidance to build strong, memorable brand identities and solve complex creative challenges." data-ar="توجيه استراتيجي لبناء هويات علامات تجارية قوية لا تُنسى وحل التحديات الإبداعية." data-ru="Стратегическое руководство для создания сильных брендов.">Strategic guidance to build strong, memorable brand identities and solve complex creative challenges.</p>
+            </div>
+            <div class="service-card reveal reveal-delay-2">
+                <i class="fas fa-box-open"></i>
+                <h3 class="lang-txt" data-en="Packaging" data-ar="التعبئة والتغليف" data-ru="Упаковка">Packaging</h3>
+                <p class="lang-txt" data-en="High-end structural and graphic packaging design that makes your product stand out on any shelf." data-ar="تصميم هيكلي وجرافيكي فاخر للعبوات يجعل منتجك يبرز على أي رف." data-ru="Высококачественный дизайн упаковки, который выделяет ваш продукт.">High-end structural and graphic packaging design that makes your product stand out on any shelf.</p>
+            </div>
+            <div class="service-card reveal reveal-delay-3">
+                <i class="fas fa-vector-square"></i>
+                <h3 class="lang-txt" data-en="Visual Design" data-ar="التصميم المرئي" data-ru="Визуальный Дизайн">Visual Design</h3>
+                <p class="lang-txt" data-en="Crafting exceptional visual identities, digital assets, and print materials with meticulous attention to detail." data-ar="صياغة هويات بصرية استثنائية، وأصول رقمية، ومواد مطبوعة مع اهتمام دقيق بالتفاصيل." data-ru="Создание исключительных визуальных идентичностей и цифровых активов.">Crafting exceptional visual identities, digital assets, and print materials with meticulous attention to detail.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="reveal">
+        <h2 class="section-title lang-txt" data-en="Portfolio" data-ar="معرض الأعمال" data-ru="Портфолио">Portfolio</h2>
+        
+        <div class="portfolio-container">
+            <!-- Professional Slider -->
+            <div class="slider-wrapper" id="portfolio-slider">
+                <!-- Slide 1 -->
+                <div class="slide active">
+                    <img src="1.png" alt="Project 1">
+                    <div class="slide-caption">
+                        <h3 class="lang-txt" data-en="Brand Identity & Packaging 01" data-ar="هوية العلامة التجارية والتغليف 01" data-ru="Брендинг и Упаковка 01">Brand Identity & Packaging 01</h3>
+                        <span class="slide-counter">1 / 7</span>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <img src="2.png" alt="Project 2">
+                    <div class="slide-caption">
+                        <h3 class="lang-txt" data-en="Luxury Product Box Design 02" data-ar="تصميم علبة منتج فاخر 02" data-ru="Дизайн премиум коробки 02">Luxury Product Box Design 02</h3>
+                        <span class="slide-counter">2 / 7</span>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <img src="3.png" alt="Project 3">
+                    <div class="slide-caption">
+                        <h3 class="lang-txt" data-en="Visual Identity & Assets 03" data-ar="الهوية البصرية والأصول 03" data-ru="Визуальный стиль 03">Visual Identity & Assets 03</h3>
+                        <span class="slide-counter">3 / 7</span>
+                    </div>
+                </div>
+                <!-- Slide 4 -->
+                <div class="slide">
+                    <img src="4.png" alt="Project 4">
+                    <div class="slide-caption">
+                        <h3 class="lang-txt" data-en="Structural Packaging Concept 04" data-ar="مفهوم التغليف الهيكلي 04" data-ru="Концепт упаковки 04">Structural Packaging Concept 04</h3>
+                        <span class="slide-counter">4 / 7</span>
+                    </div>
+                </div>
+                <!-- Slide 5 -->
+                <div class="slide">
+                    <img src="5.png" alt="Project 5">
+                    <div class="slide-caption">
+                        <h3 class="lang-txt" data-en="Corporate Branding & Print 05" data-ar="العلامات التجارية والمطبوعات 05" data-ru="Корпоративный стиль 05">Corporate Branding & Print 05</h3>
+                        <span class="slide-counter">5 / 7</span>
+                    </div>
+                </div>
+                <!-- Slide 6 -->
+                <div class="slide">
+                    <img src="6.png" alt="Project 6">
+                    <div class="slide-caption">
+                        <h3 class="lang-txt" data-en="Exquisite Retail Packaging 06" data-ar="تغليف التجزئة الراقي 06" data-ru="Розничная упаковка 06">Exquisite Retail Packaging 06</h3>
+                        <span class="slide-counter">6 / 7</span>
+                    </div>
+                </div>
+                <!-- Slide 7: PDF Portfolio Quick Jump -->
+                <div class="slide">
+                    <div class="slide-pdf-card">
+                        <i class="fas fa-file-pdf"></i>
+                        <h3 class="lang-txt" data-en="Explore Full PDF Portfolio" data-ar="استكشف ملف أعمال PDF الكامل" data-ru="Полное портфолио PDF">Explore Full PDF Portfolio</h3>
+                        <p class="lang-txt" data-en="Browse our comprehensive catalog featuring all our packaging designs, brand strategies, and creative works." data-ar="تصفح كتيبنا الشامل الذي يضم جميع تصاميم التغليف واستراتيجيات العلامات التجارية والأعمال الابداعية." data-ru="Просмотрите наш исчерпывающий каталог.">Browse our comprehensive catalog featuring all our packaging designs, brand strategies, and creative works.</p>
+                        <a href="portfolio.pdf" target="_blank" class="pdf-action-btn">
+                            <i class="fas fa-eye"></i> <span class="lang-txt" data-en="View PDF Portfolio" data-ar="عرض بورتفيليو PDF" data-ru="Открыть PDF">View PDF Portfolio</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Slider Arrows -->
+                <button class="slider-btn slider-prev" id="slider-prev" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn slider-next" id="slider-next" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <!-- Slider Dots -->
+            <div class="slider-dots" id="slider-dots">
+                <button class="dot active" data-index="0"></button>
+                <button class="dot" data-index="1"></button>
+                <button class="dot" data-index="2"></button>
+                <button class="dot" data-index="3"></button>
+                <button class="dot" data-index="4"></button>
+                <button class="dot" data-index="5"></button>
+                <button class="dot" data-index="6"></button>
+            </div>
+
+            <!-- Dedicated PDF Portfolio Section Below Slider -->
+            <div class="pdf-portfolio-box reveal">
+                <div class="pdf-box-info">
+                    <div class="pdf-box-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="pdf-box-text">
+                        <h3 class="lang-txt" data-en="Our Portfolio" data-ar="معرض أعمالنا (PDF)" data-ru="Наше портфолио">Our Portfolio</h3>
+                        <p class="lang-txt" data-en="Download or view our complete professional portfolio in PDF format for an in-depth look at our packaging solutions and branding projects." data-ar="قم بتحميل أو استعرض بورتفيليو الأعمال الاحترافي الكامل بصيغة PDF للاطلاع بعمق على حلول التغليف ومشاريعنا." data-ru="Загрузите или просмотрите наше полное профессиональное портфолио в формате PDF.">Download or view our complete professional portfolio in PDF format for an in-depth look at our packaging solutions and branding projects.</p>
+                    </div>
+                </div>
+                <a href="portfolio.pdf" target="_blank" class="pdf-action-btn">
+                    <i class="fas fa-download"></i> <span class="lang-txt" data-en="Open PDF Portfolio" data-ar="فتح بورتفيليو PDF" data-ru="Открыть PDF">Open PDF Portfolio</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="reveal">
+        <h2 class="section-title lang-txt" data-en="Get In Touch" data-ar="تواصل معنا" data-ru="Свяжитесь с нами">Get In Touch</h2>
+        
+        <div class="contact-container">
+            <!-- Contact Details -->
+            <div class="contact-info reveal">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="lang-txt" data-en="Aleppo - Syria - Al-Jamilieh - Al-buhtori St." data-ar="حلب - سوريا - الجميلية - شارع البحتري" data-ru="Алеппо - Сирия - Аль-Джамилия - ул. Аль-Бухтори">Aleppo - Syria - Al-Jamilieh - Al-buhtori St.</span>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <a href="tel:+963933219565">+963 933 219 565</a>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <a href="tel:+963212275722">+963 212 275 722</a> <br>
+                        <a href="tel:+963212264936" style="margin-top:5px; display:inline-block;">+963 212 264 936</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:reflectionartwork@gmail.com">reflectionartwork@gmail.com</a>
+                </div>
+
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/share/1E6cXrxDu7/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/reflection.sy/?hl=ar" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/963933219565" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://maps.app.goo.gl/5aSiebPsK1FijLUP9?g_st=it" target="_blank" title="Location"><i class="fas fa-map-marked-alt"></i></a>
+                </div>
+            </div>
+
+            <!-- CEO Info placed elegantly at the end -->
+            <div class="ceo-info reveal reveal-delay-2">
+                <h3 class="lang-txt" data-en="CEO / Art Director" data-ar="المدير التنفيذي / المدير الفني" data-ru="Генеральный директор / Арт-директор">CEO / Art Director</h3>
+                <h2>BASSEL AL-SAMMAN</h2>
+                <p>Reflection Company</p>
+                <img src="logo_text.png" alt="Reflection" style="height: 30px; margin-top: 30px; opacity: 0.5;">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // --- Interactive Mouse Background ---
+        const bg = document.getElementById('interactive-bg');
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            bg.style.setProperty('--mouse-x', `${x}%`);
+            bg.style.setProperty('--mouse-y', `${y}%`);
+        });
+
+        // --- Mobile Menu Toggle ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // --- Scroll Reveal Animations (Modified to repeat on scroll up/down) ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    // إزالة الفئة عند الخروج من الشاشة لتعمل حركة التلاشي صعوداً ونزولاً في كل مرة
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => revealOnScroll.observe(el));
+
+        // --- Professional Slider Logic ---
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.getElementById('slider-prev');
+        const nextBtn = document.getElementById('slider-next');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            currentSlide = (index + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetTimer();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetTimer();
+        });
+
+        dots.forEach((dot, idx) => {
+            dot.addEventListener('click', () => {
+                showSlide(idx);
+                resetTimer();
+            });
+        });
+
+        // Auto play slider every 4.5 seconds
+        function startTimer() {
+            slideInterval = setInterval(nextSlide, 4500);
+        }
+
+        function resetTimer() {
+            clearInterval(slideInterval);
+            startTimer();
+        }
+
+        startTimer();
+
+        // Pause auto-slide on hover
+        const sliderWrapper = document.getElementById('portfolio-slider');
+        sliderWrapper.addEventListener('mouseenter', () => clearInterval(slideInterval));
+        sliderWrapper.addEventListener('mouseleave', () => startTimer());
+
+        // --- Language Switcher ---
+        function setLang(lang) {
+            // Update active button styling in language switch
+            document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Change direction and font family based on language
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                document.body.style.fontFamily = "var(--font-ar)";
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.body.style.fontFamily = "var(--font-en)";
+            }
+
+            // Update text content
+            document.querySelectorAll('.lang-txt').forEach(elem => {
+                elem.innerText = elem.getAttribute('data-' + lang);
+            });
+        }
+    </script>
+</body>
+</html>
