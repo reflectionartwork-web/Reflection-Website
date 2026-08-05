@@ -65,6 +65,7 @@
         .reveal-delay-1 { transition-delay: 0.2s; }
         .reveal-delay-2 { transition-delay: 0.4s; }
         .reveal-delay-3 { transition-delay: 0.6s; }
+        .reveal-delay-4 { transition-delay: 0.8s; }
 
         /* Navbar */
         nav {
@@ -83,7 +84,8 @@
         }
 
         .logo img {
-            height: 35px;
+            height: 30px; 
+            transition: all 0.3s ease;
         }
 
         .nav-links {
@@ -147,7 +149,6 @@
             color: #fff;
         }
 
-        /* Mobile Menu Toggle */
         .menu-toggle {
             display: none;
             background: transparent;
@@ -178,14 +179,15 @@
             width: 100%;
         }
 
+        /* تم تكبير اللوغو المتحرك بناءً على طلبك */
         .main-logo-animated {
-            width: 90px;
-            height: 170px;
+            width: 130px;
+            height: 230px;
             object-fit: contain;
-            filter: drop-shadow(0 0 20px rgba(211,0,0,0.3));
+            filter: drop-shadow(0 0 25px rgba(211, 0, 0, 0.4));
+            transition: all 0.3s ease;
         }
 
-        /* Responsive Brand Title (REFLECTION) - Fully Responsive */
         .brand-title {
             font-size: clamp(1.8rem, 7vw, 4rem);
             font-weight: 300;
@@ -198,7 +200,6 @@
             padding: 0 10px;
         }
 
-        /* Responsive Hero Subtitle (Slogan) - Proportional Sizing */
         .hero-subtitle {
             font-size: clamp(0.85rem, 3vw, 1.25rem);
             font-weight: 300;
@@ -238,7 +239,6 @@
             border-radius: 2px;
         }
 
-        /* About & Services Text */
         .text-content {
             max-width: 850px;
             margin: 0 auto;
@@ -246,6 +246,93 @@
             font-size: 1.15rem;
             line-height: 1.8;
             color: #bbb;
+        }
+
+        /* ========================================= */
+        /* Interactive Stats Indicators (About Us)   */
+        /* ========================================= */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 50px auto 0;
+            padding: 0 10px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(211, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 10px 30px rgba(211, 0, 0, 0.15);
+        }
+
+        .stat-circle-wrap {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .stat-svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .stat-circle-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 6;
+        }
+
+        .stat-circle-progress {
+            fill: none;
+            stroke: var(--accent-color);
+            stroke-width: 6;
+            stroke-dasharray: 264;
+            stroke-dashoffset: 264;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 2s cubic-bezier(0.1, 0.5, 0.5, 1);
+            filter: drop-shadow(0 0 6px rgba(211, 0, 0, 0.6));
+        }
+
+        .stat-card.animated .stat-circle-progress {
+            stroke-dashoffset: calc(264 - (264 * var(--percent)) / 100);
+        }
+
+        .stat-number {
+            position: absolute;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: #aaa;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
         }
 
         /* Services Grid */
@@ -307,15 +394,99 @@
             font-size: 0.95rem;
         }
 
+        /* ========================================= */
+        /* Dual Row Clients Logo Slider              */
+        /* ========================================= */
+        .clients-slider {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.01);
+            border-top: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            max-width: 1200px;
+            margin: 40px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 35px; /* مسافة بين السطرين */
+        }
+
+        .clients-slider::before,
+        .clients-slider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .clients-slider::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-color) 0%, transparent 100%);
+        }
+
+        .clients-slider::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-color) 0%, transparent 100%);
+        }
+
+        .clients-track {
+            display: flex;
+            align-items: center;
+            width: max-content;
+            gap: 65px;
+        }
+
+        .clients-track.row-1 {
+            animation: scrollClientsLeft 32s linear infinite;
+        }
+
+        .clients-track.row-2 {
+            animation: scrollClientsRight 36s linear infinite;
+        }
+
+        .clients-track:hover {
+            animation-play-state: paused;
+        }
+
+        .clients-track img {
+            height: 55px;
+            opacity: 0.45;
+            filter: grayscale(100%) brightness(200%);
+            transition: all 0.4s ease;
+            object-fit: contain;
+            cursor: pointer;
+        }
+
+        .clients-track img:hover {
+            opacity: 1;
+            filter: grayscale(0%) brightness(100%);
+            transform: scale(1.15);
+        }
+
+        @keyframes scrollClientsLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 32.5px)); } 
+        }
+
+        @keyframes scrollClientsRight {
+            0% { transform: translateX(calc(-50% - 32.5px)); }
+            100% { transform: translateX(0); } 
+        }
+
         /* Portfolio Container & Slider */
         .portfolio-container {
-            max-width: 500px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .slider-wrapper {
             position: relative;
-            width: 100%;
+            width: 50%;
+            margin: 0 auto;
             aspect-ratio: 16 / 10;
             background: #111;
             border-radius: 16px;
@@ -378,7 +549,6 @@
             flex-shrink: 0;
         }
 
-        /* Slide 7 Special Styling */
         .slide-pdf-card {
             width: 100%;
             height: 100%;
@@ -437,7 +607,6 @@
             box-shadow: 0 8px 25px rgba(211,0,0,0.6);
         }
 
-        /* Slider Controls */
         .slider-btn {
             position: absolute;
             top: 50%;
@@ -465,7 +634,6 @@
         .slider-prev { left: 12px; }
         .slider-next { right: 12px; }
 
-        /* Slider Dots */
         .slider-dots {
             display: flex;
             justify-content: center;
@@ -489,7 +657,6 @@
             transform: scale(1.2);
         }
 
-        /* PDF Portfolio Direct Box */
         .pdf-portfolio-box {
             margin-top: 40px;
             background: linear-gradient(145deg, rgba(20, 5, 5, 0.9) 0%, rgba(10, 2, 2, 0.95) 100%);
@@ -564,7 +731,6 @@
             overflow: hidden;
         }
 
-        /* CEO Info Box */
         .ceo-info {
             display: flex;
             flex-direction: column;
@@ -583,7 +749,6 @@
             margin-bottom: 12px;
         }
 
-        /* Responsive & Smaller CEO Name (Bassel Al-Samman) */
         .ceo-info h2 {
             font-size: clamp(0.95rem, 3.5vw, 1.35rem);
             font-weight: 800;
@@ -643,7 +808,6 @@
             color: var(--accent-color);
         }
 
-        /* Social Icons */
         .social-icons {
             display: flex;
             gap: 10px;
@@ -674,14 +838,10 @@
             box-shadow: 0 10px 20px rgba(211, 0, 0, 0.4);
         }
 
-        /* Responsive Design for Mobile & Tablet */
+        /* Responsive Design */
         @media (max-width: 900px) {
-            nav {
-                padding: 15px 20px;
-            }
-            .menu-toggle {
-                display: block;
-            }
+            nav { padding: 15px 20px; }
+            .menu-toggle { display: block; }
             .nav-links {
                 position: absolute;
                 top: 100%;
@@ -703,6 +863,13 @@
                 opacity: 1;
                 pointer-events: auto;
             }
+            
+            .main-logo-animated { width: 100px; height: 180px; }
+            .slider-wrapper { width: 90%; }
+            .clients-track img { height: 42px; }
+            .clients-track { gap: 45px; }
+            .stats-container { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+
             .pdf-portfolio-box {
                 flex-direction: column;
                 text-align: center;
@@ -712,12 +879,12 @@
                 flex-direction: column;
                 gap: 15px;
             }
-            section {
-                padding: 70px 15px;
-            }
-            .section-title {
-                font-size: 1.8rem;
-            }
+            section { padding: 70px 15px; }
+            .section-title { font-size: 1.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            .stats-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -736,6 +903,7 @@
             <li><a href="#home" class="lang-txt" data-en="Home" data-ar="الرئيسية" data-ru="Главная">Home</a></li>
             <li><a href="#about" class="lang-txt" data-en="About" data-ar="من نحن" data-ru="О нас">About</a></li>
             <li><a href="#services" class="lang-txt" data-en="Services" data-ar="خدماتنا" data-ru="Услуги">Services</a></li>
+            <li><a href="#clients" class="lang-txt" data-en="Clients" data-ar="عملاؤنا" data-ru="Клиенты">Clients</a></li>
             <li><a href="#portfolio" class="lang-txt" data-en="Portfolio" data-ar="أعمالنا" data-ru="Портфолио">Portfolio</a></li>
             <li><a href="#contact" class="lang-txt" data-en="Contact" data-ar="اتصل بنا" data-ru="Контакты">Contact</a></li>
             <li class="lang-switch">
@@ -748,7 +916,7 @@
 
     <section id="home" class="hero reveal">
         <div class="hero-logos">
-            <!-- Animated Vertical Logo -->
+            <!-- Animated Vertical Logo (Enlarged) -->
             <img src="animated_logo.gif" alt="Reflection Animated Logo" class="main-logo-animated">
             <!-- Brand Name Text -->
             <h1 class="brand-title lang-txt reveal reveal-delay-1" 
@@ -766,6 +934,57 @@
         <h2 class="section-title lang-txt" data-en="About Us" data-ar="من نحن" data-ru="О нас">About Us</h2>
         <div class="text-content lang-txt" data-en="We are Reflection, a premium agency dedicated to elevating brands through innovative consulting, structural packaging, and cutting-edge visual design. We transform abstract ideas into tangible, high-end realities that resonate with your target audience and stand the test of time." data-ar="نحن شركة ريفليكشن، وكالة رائدة مكرسة للارتقاء بالعلامات التجارية من خلال الاستشارات المبتكرة، وتصميم العبوات، والتصميم المرئي المتطور. نحن نحول الأفكار المجردة إلى حقائق ملموسة وعالية الجودة تترك أثراً طويل الأمد." data-ru="Мы - Reflection, ведущее агентство, специализирующееся на консалтинге, упаковке и передовом визуальном дизайне. Мы превращаем идеи в визуальные шедевры.">
             We are Reflection, a premium agency dedicated to elevating brands through innovative consulting, structural packaging, and cutting-edge visual design. We transform abstract ideas into tangible, high-end realities that resonate with your target audience and stand the test of time.
+        </div>
+
+        <!-- Interactive Circular & Numerical Stats Indicators -->
+        <div class="stats-container reveal reveal-delay-2">
+            <!-- Stat 1: Years Experience -->
+            <div class="stat-card">
+                <div class="stat-circle-wrap">
+                    <svg class="stat-svg" viewBox="0 0 100 100">
+                        <circle class="stat-circle-bg" cx="50" cy="50" r="42"></circle>
+                        <circle class="stat-circle-progress" cx="50" cy="50" r="42" style="--percent: 92;"></circle>
+                    </svg>
+                    <div class="stat-number" data-target="15" data-prefix="+">0</div>
+                </div>
+                <div class="stat-label lang-txt" data-en="Years Experience" data-ar="سنوات خبرة" data-ru="Лет опыта">Years Experience</div>
+            </div>
+
+            <!-- Stat 2: Loyal Clients -->
+            <div class="stat-card">
+                <div class="stat-circle-wrap">
+                    <svg class="stat-svg" viewBox="0 0 100 100">
+                        <circle class="stat-circle-bg" cx="50" cy="50" r="42"></circle>
+                        <circle class="stat-circle-progress" cx="50" cy="50" r="42" style="--percent: 88;"></circle>
+                    </svg>
+                    <div class="stat-number" data-target="250" data-prefix="+">0</div>
+                </div>
+                <div class="stat-label lang-txt" data-en="Loyal Clients" data-ar="عميل ثابت" data-ru="Постоянных клиентов">Loyal Clients</div>
+            </div>
+
+            <!-- Stat 3: Completed Projects -->
+            <div class="stat-card">
+                <div class="stat-circle-wrap">
+                    <svg class="stat-svg" viewBox="0 0 100 100">
+                        <circle class="stat-circle-bg" cx="50" cy="50" r="42"></circle>
+                        <circle class="stat-circle-progress" cx="50" cy="50" r="42" style="--percent: 98;"></circle>
+                    </svg>
+                    <div class="stat-number" data-target="3500" data-prefix="+">0</div>
+                </div>
+                <div class="stat-label lang-txt" data-en="Projects Completed" data-ar="مشروع تم إنجازه" data-ru="Завершенных проектов">Projects Completed</div>
+            </div>
+
+            <!-- Stat 4: Satisfaction Rate -->
+            <div class="stat-card">
+                <div class="stat-circle-wrap">
+                    <svg class="stat-svg" viewBox="0 0 100 100">
+                        <circle class="stat-circle-bg" cx="50" cy="50" r="42"></circle>
+                        <circle class="stat-circle-progress" cx="50" cy="50" r="42" style="--percent: 99;"></circle>
+                    </svg>
+                    <div class="stat-number" data-target="99" data-suffix="%">0</div>
+                </div>
+                <div class="stat-label lang-txt" data-en="Satisfaction Rate" data-ar="نسبة رضا العملاء" data-ru="Уровень удовлетворенности">Satisfaction Rate</div>
+            </div>
         </div>
     </section>
 
@@ -787,6 +1006,55 @@
                 <h3 class="lang-txt" data-en="Visual Design" data-ar="التصميم المرئي" data-ru="Визуальный Дизайн">Visual Design</h3>
                 <p class="lang-txt" data-en="Crafting exceptional visual identities, digital assets, and print materials with meticulous attention to detail." data-ar="صياغة هويات بصرية استثنائية، وأصول رقمية، ومواد مطبوعة مع اهتمام دقيق بالتفاصيل." data-ru="Создание исключительных визуальных идентичностей и цифровых активов.">Crafting exceptional visual identities, digital assets, and print materials with meticulous attention to detail.</p>
             </div>
+            <div class="service-card reveal reveal-delay-4">
+                <i class="fas fa-print"></i>
+                <h3 class="lang-txt" data-en="High-Quality Printing" data-ar="الطباعة عالية الجودة" data-ru="Высококачественная печать">High-Quality Printing</h3>
+                <p class="lang-txt" data-en="Premium printing with the best materials for all types of fabrics and substrates." data-ar="الطباعة عالية الجودة بأفضل المواد ولكل أنواع الخامات." data-ru="Премиальная печать лучшими материалами для всех типов материалов.">Premium printing with the best materials for all types of fabrics and substrates.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dual Row Clients Section -->
+    <section id="clients" class="reveal">
+        <h2 class="section-title lang-txt" data-en="Our Clients" data-ar="شركاء النجاح" data-ru="Наши Клиенты">Our Clients</h2>
+        <div class="text-content lang-txt" style="margin-bottom: 20px;" data-en="We take pride in partnering with industry-leading brands, reflecting our commitment to professionalism and high-end design in every project." data-ar="نفخر بالتعاون مع علامات تجارية مرموقة، مما يعكس التزامنا بالاحترافية والتصميم الراقي في كل مشروع." data-ru="Мы гордимся партнерством с ведущими брендами отрасли.">
+            We take pride in partnering with industry-leading brands, reflecting our commitment to professionalism and high-end design in every project.
+        </div>
+        
+        <div class="clients-slider">
+            <!-- السطر الأول من الشعارات (يتجه لليسار) -->
+            <div class="clients-track row-1">
+                <img src="client1.png" alt="Client 1">
+                <img src="client2.png" alt="Client 2">
+                <img src="client3.png" alt="Client 3">
+                <img src="client4.png" alt="Client 4">
+                <img src="client5.png" alt="Client 5">
+                <img src="client6.png" alt="Client 6">
+                <!-- التكرار للموجة الأولى -->
+                <img src="client1.png" alt="Client 1">
+                <img src="client2.png" alt="Client 2">
+                <img src="client3.png" alt="Client 3">
+                <img src="client4.png" alt="Client 4">
+                <img src="client5.png" alt="Client 5">
+                <img src="client6.png" alt="Client 6">
+            </div>
+
+            <!-- السطر الثاني من الشعارات (يتجه لليمين لتأثير ديناميكي مذهل) -->
+            <div class="clients-track row-2">
+                <img src="client7.png" alt="Client 7">
+                <img src="client8.png" alt="Client 8">
+                <img src="client9.png" alt="Client 9">
+                <img src="client10.png" alt="Client 10">
+                <img src="client11.png" alt="Client 11">
+                <img src="client12.png" alt="Client 12">
+                <!-- التكرار للموجة الثانية -->
+                <img src="client7.png" alt="Client 7">
+                <img src="client8.png" alt="Client 8">
+                <img src="client9.png" alt="Client 9">
+                <img src="client10.png" alt="Client 10">
+                <img src="client11.png" alt="Client 11">
+                <img src="client12.png" alt="Client 12">
+            </div>
         </div>
     </section>
 
@@ -794,9 +1062,7 @@
         <h2 class="section-title lang-txt" data-en="Portfolio" data-ar="معرض الأعمال" data-ru="Портфолио">Portfolio</h2>
         
         <div class="portfolio-container">
-            <!-- Professional Slider -->
             <div class="slider-wrapper" id="portfolio-slider">
-                <!-- Slide 1 -->
                 <div class="slide active">
                     <img src="1.png" alt="Project 1">
                     <div class="slide-caption">
@@ -804,7 +1070,6 @@
                         <span class="slide-counter">1 / 7</span>
                     </div>
                 </div>
-                <!-- Slide 2 -->
                 <div class="slide">
                     <img src="2.png" alt="Project 2">
                     <div class="slide-caption">
@@ -812,7 +1077,6 @@
                         <span class="slide-counter">2 / 7</span>
                     </div>
                 </div>
-                <!-- Slide 3 -->
                 <div class="slide">
                     <img src="3.png" alt="Project 3">
                     <div class="slide-caption">
@@ -820,7 +1084,6 @@
                         <span class="slide-counter">3 / 7</span>
                     </div>
                 </div>
-                <!-- Slide 4 -->
                 <div class="slide">
                     <img src="4.png" alt="Project 4">
                     <div class="slide-caption">
@@ -828,7 +1091,6 @@
                         <span class="slide-counter">4 / 7</span>
                     </div>
                 </div>
-                <!-- Slide 5 -->
                 <div class="slide">
                     <img src="5.png" alt="Project 5">
                     <div class="slide-caption">
@@ -836,7 +1098,6 @@
                         <span class="slide-counter">5 / 7</span>
                     </div>
                 </div>
-                <!-- Slide 6 -->
                 <div class="slide">
                     <img src="6.png" alt="Project 6">
                     <div class="slide-caption">
@@ -844,7 +1105,6 @@
                         <span class="slide-counter">6 / 7</span>
                     </div>
                 </div>
-                <!-- Slide 7: PDF Portfolio Quick Jump -->
                 <div class="slide">
                     <div class="slide-pdf-card">
                         <i class="fas fa-file-pdf"></i>
@@ -856,12 +1116,10 @@
                     </div>
                 </div>
 
-                <!-- Slider Arrows -->
                 <button class="slider-btn slider-prev" id="slider-prev" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
                 <button class="slider-btn slider-next" id="slider-next" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
             </div>
 
-            <!-- Slider Dots -->
             <div class="slider-dots" id="slider-dots">
                 <button class="dot active" data-index="0"></button>
                 <button class="dot" data-index="1"></button>
@@ -872,7 +1130,6 @@
                 <button class="dot" data-index="6"></button>
             </div>
 
-            <!-- Dedicated PDF Portfolio Section Below Slider -->
             <div class="pdf-portfolio-box reveal">
                 <div class="pdf-box-info">
                     <div class="pdf-box-icon">
@@ -894,7 +1151,6 @@
         <h2 class="section-title lang-txt" data-en="Get In Touch" data-ar="تواصل معنا" data-ru="Свяжитесь с нами">Get In Touch</h2>
         
         <div class="contact-container">
-            <!-- Contact Details -->
             <div class="contact-info reveal">
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
@@ -927,12 +1183,11 @@
                 </div>
             </div>
 
-            <!-- CEO Info -->
             <div class="ceo-info reveal reveal-delay-2">
                 <h3 class="lang-txt" data-en="CEO / Art Director" data-ar="المدير التنفيذي / المدير الفني" data-ru="Генеральный директор / Арт-директор">CEO / Art Director</h3>
                 <h2>BASSEL AL-SAMMAN</h2>
                 <p class="lang-txt" data-en="Reflection Company" data-ar="شركة ريفليكشن" data-ru="Reflection Company">Reflection Company</p>
-                <img src="logo_text.png" alt="Reflection" style="height: 25px; margin-top: 25px; opacity: 0.5; max-width: 100%; object-fit: contain;">
+                <img src="logo_text.png" alt="Reflection" style="height: 12px; margin-top: 25px; opacity: 0.5; max-width: 100%; object-fit: contain;">
             </div>
         </div>
     </section>
@@ -940,16 +1195,12 @@
     <script>
         // --- Interactive Mouse & Mobile Auto Background ---
         const bg = document.getElementById('interactive-bg');
-        
-        // التحقق مما إذا كان الجهاز حاسوباً (شاشة كبيرة ولا يدعم اللمس)
         let isDesktop = window.innerWidth > 900 && !('ontouchstart' in window);
 
-        // تحديث الحالة عند تغيير حجم الشاشة
         window.addEventListener('resize', () => {
             isDesktop = window.innerWidth > 900 && !('ontouchstart' in window);
         });
 
-        // 1. حركة المؤشر للحاسوب
         document.addEventListener('mousemove', (e) => {
             if (isDesktop) {
                 const x = (e.clientX / window.innerWidth) * 100;
@@ -959,24 +1210,16 @@
             }
         });
 
-        // 2. الحركة العشوائية الانسيابية للهاتف
         function animateMobileGradient() {
             if (!isDesktop) {
-                // المتغير time يتحكم بالسرعة (رقم أصغر = حركة أبطأ وأكثر نعومة)
-                const time = Date.now() * 0.001; 
-                
-                // دمج دوال الجيب (sin) وجيب التمام (cos) لتوليد مسار انسيابي متعرج
+                const time = Date.now() * 0.0004; 
                 const x = 50 + 40 * Math.sin(time * 0.7) * Math.cos(time * 0.3);
                 const y = 50 + 40 * Math.cos(time * 0.8) * Math.sin(time * 0.4);
-                
                 bg.style.setProperty('--mouse-x', `${x}%`);
                 bg.style.setProperty('--mouse-y', `${y}%`);
             }
-            // استدعاء الدالة باستمرار في كل إطار (Frame)
             requestAnimationFrame(animateMobileGradient);
         }
-
-        // تشغيل حلقة الحركة
         animateMobileGradient();
 
         // --- Mobile Menu Toggle ---
@@ -995,7 +1238,6 @@
             }
         });
 
-        // Close mobile menu on link click
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -1021,7 +1263,45 @@
 
         revealElements.forEach(el => revealOnScroll.observe(el));
 
-        // --- Professional Slider Logic ---
+        // --- Interactive Animated Stats Counters ---
+        const statCards = document.querySelectorAll('.stat-card');
+        let statsAnimated = false;
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    statCards.forEach(card => {
+                        card.classList.add('animated');
+                        const numElem = card.querySelector('.stat-number');
+                        const target = parseInt(numElem.getAttribute('data-target'));
+                        const prefix = numElem.getAttribute('data-prefix') || '';
+                        const suffix = numElem.getAttribute('data-suffix') || '';
+                        
+                        let start = 0;
+                        const duration = 2000;
+                        const stepTime = Math.max(Math.floor(duration / (target > 100 ? 50 : target)), 30);
+                        
+                        const timer = setInterval(() => {
+                            start += Math.ceil(target / 40);
+                            if (start >= target) {
+                                numElem.innerText = prefix + target + suffix;
+                                clearInterval(timer);
+                            } else {
+                                numElem.innerText = prefix + start + suffix;
+                            }
+                        }, stepTime);
+                    });
+                    statsAnimated = true;
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const statsContainer = document.querySelector('.stats-container');
+        if (statsContainer) {
+            statsObserver.observe(statsContainer);
+        }
+
+        // --- Professional Portfolio Slider Logic ---
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
         const prevBtn = document.getElementById('slider-prev');
@@ -1039,39 +1319,18 @@
             dots[currentSlide].classList.add('active');
         }
 
-        function nextSlide() {
-            showSlide(currentSlide + 1);
-        }
+        function nextSlide() { showSlide(currentSlide + 1); }
+        function prevSlide() { showSlide(currentSlide - 1); }
 
-        function prevSlide() {
-            showSlide(currentSlide - 1);
-        }
-
-        nextBtn.addEventListener('click', () => {
-            nextSlide();
-            resetTimer();
-        });
-
-        prevBtn.addEventListener('click', () => {
-            prevSlide();
-            resetTimer();
-        });
+        nextBtn.addEventListener('click', () => { nextSlide(); resetTimer(); });
+        prevBtn.addEventListener('click', () => { prevSlide(); resetTimer(); });
 
         dots.forEach((dot, idx) => {
-            dot.addEventListener('click', () => {
-                showSlide(idx);
-                resetTimer();
-            });
+            dot.addEventListener('click', () => { showSlide(idx); resetTimer(); });
         });
 
-        function startTimer() {
-            slideInterval = setInterval(nextSlide, 4500);
-        }
-
-        function resetTimer() {
-            clearInterval(slideInterval);
-            startTimer();
-        }
+        function startTimer() { slideInterval = setInterval(nextSlide, 4500); }
+        function resetTimer() { clearInterval(slideInterval); startTimer(); }
 
         startTimer();
 
